@@ -78,23 +78,53 @@ size_t lista_largo(const lista_t *lista);
  *                  PRIMITIVAS DEL ITERADOR EXTERNO	
  * *****************************************************************/
 
+// Crea un iterador asociado a una lista. Si la lista tiene elementos el
+// iterador apunta al primer elemento, en caso contrario apunta al último
+// Pre: una lista creada
+// Post: devuelve un iterador asociado a la lista
 lista_iter_t *lista_iter_crear(lista_t *lista);
 
+// El iterador se mueve una posicion. Devuelve false en caso de que el
+// iterador está al final.
+// Pre: un iterador creado.
+// Post: el iterador avanzó un lugar (en caso de true).
 bool lista_iter_avanzar(lista_iter_t *iter);
 
+// Devuelve el puntero del actual. En caso de estar al final devuelve
+// NULL.
+// Pre: un iterador creado.
+// Post: devuelve el dato del actual.
 void *lista_iter_ver_actual(const lista_iter_t *iter);
 
+// Devuelve true si el iterador se encuentra al final. 
+// Pre: un iterador creado.
 bool lista_iter_al_final(const lista_iter_t *iter);
 
+// Destruye el iterador.
+// Pre: un iterador creado.
 void lista_iter_destruir(lista_iter_t *iter);
 
+// Inserta el dato en la lista en la posicion actual del iterador.
+// Devuelve false si no se pude insertar el dato.
+// Pre: iter creado.
+// Post: si es true el elemento fue insertado.
 bool lista_iter_insertar(lista_iter_t *iter, void *dato);
 
+// Borra el elemento apuntado por el iter en la posicion actual y devuelve
+// el valor. Si el iter está al final devuelve NULL.
+// Pre:iter creado.
+// Post: devuelve valor o NULL.
 void *lista_iter_borrar(lista_iter_t *iter);
 
 /* ******************************************************************
  *                  PRIMITIVA DEL ITERADOR INTERNO 
  * *****************************************************************/
+
+// Aplica la funcion visitar a cada elemento de la lista hasta que devuelva
+// false o no haya mas elementos. El extra se usa para cualquier proposito que
+// se crea necesario.
+// Pre: una lista.
+// Post: lista con la funcion visitar apliada.
 void lista_iterar(lista_t *lista, bool (*visitar)(void *dato, void *extra), void *extra);
 
 /* *****************************************************************
@@ -102,7 +132,6 @@ void lista_iterar(lista_t *lista, bool (*visitar)(void *dato, void *extra), void
  * *****************************************************************/
 
 // Realiza pruebas sobre la implementación del alumno.
-
 // Para la implementación de las pruebas se debe emplear la función
 // print_test(), como se ha visto en TPs anteriores.
 void pruebas_lista_alumno(void);
